@@ -7,9 +7,13 @@ from .database import init_db, get_db
 from . import models
 
 app = FastAPI(title="Raising Daisies – Backend", version="0.5.0")
-app.add_middleware(CORSORMiddleware:=CORSMiddleware, allow_origins=os.getenv('CORS_ALLOW_ORIGINS','*').split(','), allow_credentials=True, allow_methods=["*"], allow_headers=["*"])
-init_db()
-
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=os.getenv("CORS_ALLOW_ORIGINS", "*").split(","),
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 def auth_ok(authorization: str | None):
     token = os.getenv("ADMIN_TOKEN")
     if not token: return True
